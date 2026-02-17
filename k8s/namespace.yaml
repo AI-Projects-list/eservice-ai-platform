@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: eservice
+  labels:
+    name: eservice
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eservice-config
+  namespace: eservice
+data:
+  LOG_LEVEL: "INFO"
+  ENVIRONMENT: "production"
+  JAEGER_HOST: "jaeger-collector.observability"
+  JAEGER_PORT: "6831"
+  CACHE_DEFAULT_TTL: "3600"
+  CACHE_MAX_TTL: "86400"
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: eservice-secrets
+  namespace: eservice
+type: Opaque
+stringData:
+  DATABASE_URL: "postgresql://user:password@postgres-service:5432/eservice"
+  REDIS_URL: "redis://redis-service:6379/0"
+  RABBITMQ_URL: "amqp://guest:guest@rabbitmq-service:5672/"
+  CELERY_BROKER_URL: "redis://redis-service:6379/1"
+  OPENAI_API_KEY: "" # Set via deployment pipeline
+  SECRET_KEY: "change-in-production" # Set via vault
+  API_KEY: "change-in-production" # Set via vault
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: eservice-sa
+  namespace: eservice
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: eservice-role
+  namespace: eservice
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "list"]
+- apiGroups: [""]
+  resources: ["pods", "pods/log"]
+  verbs: ["get", "list"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: eservice-rolebinding
+  namespace: eservice
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: eservice-role
+subjects:
+- kind: ServiceAccount
+  name: eservice-sa
+  namespace: eservice
