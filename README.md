@@ -434,9 +434,6 @@ See [CONTRIBUTION.md](docs/CONTRIBUTION.md) for:
 - Testing requirements
 - Documentation standards
 
-## 📄 License
-
-MIT License - See LICENSE file for details
 
 ## 👥 Team
 
