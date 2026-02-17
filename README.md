@@ -1,10 +1,10 @@
-# Lenovo eService AI Platform
+# eService AI Platform
 
-A production-grade, enterprise-level **Intelligent Customer Service Platform** built with cutting-edge AI/LLM technology, demonstrating complete 0→1 architecture design and delivery of high-performance, scalable microservices.
+A production-grade, enterprise-level **Intelligent Customer Service Platform** built with cutting-edge AI/LLM technology, complete 0→1 architecture design and delivery of high-performance, scalable microservices.
 
 ## 🎯 Project Overview
 
-This is a real-world architecture showcasing:
+This is a real-world architecture:
 - **Microservices Architecture** with FastAPI
 - **High-Concurrency Backend** (99.9% SLA, millisecond response times)
 - **LLM/RAG/Agent Integration** (OpenAI, Claude, proprietary models)
@@ -45,7 +45,7 @@ This is a real-world architecture showcasing:
 ## 📁 Project Structure
 
 ```
-lenovo-eservice-ai-platform/
+eservice-ai-platform/
 ├── src/
 │   ├── __init__.py
 │   ├── main.py                          # Application entry point
@@ -210,7 +210,7 @@ lenovo-eservice-ai-platform/
 ```bash
 # Clone repository
 git clone <repo-url>
-cd lenovo-eservice-ai-platform
+cd eservice-ai-platform
 
 # Create virtual environment
 python -m venv venv
@@ -440,7 +440,7 @@ MIT License - See LICENSE file for details
 
 ## 👥 Team
 
-Lenovo eService Platform Team
+eService Platform Team
 - Architecture & Backend: Senior Backend Engineer
 - AI/LLM Integration: ML Engineer
 - DevOps & Infrastructure: Platform Engineer
